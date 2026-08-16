@@ -1,0 +1,45 @@
+{
+  "name": "code-copy-block",
+  "version": "1.0.0",
+  "description": "code-copy-block",
+  "homepage": "https://github.com/ruthikx/code-copy-block#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruthikx/code-copy-block.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ruthikx/code-copy-block/issues"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c --bundleConfigAsCjs && tsc --emitDeclarationOnly --declaration --declarationDir dist --noEmit false",
+    "prepack": "npm run build",
+    "rollup": "npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "react-syntax-highlighter": "^16.1.1"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}
