@@ -2,6 +2,10 @@
 
 A React code block with syntax highlighting, line numbers, a filename label, and a copy-to-clipboard button.
 
+## Preview
+
+[![code-copy-block preview](https://raw.githubusercontent.com/ruthikx/code-copy-block/main/docs/images/code-copy-block-preview.png)](https://github.com/ruthikx/code-copy-block/blob/main/docs/images/code-copy-block-preview.png)
+
 ## Installation
 
 ```bash
