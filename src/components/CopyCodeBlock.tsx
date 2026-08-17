@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -19,6 +20,50 @@ const LANGUAGE_ALIASES: Record<string, string> = {
   sh: "bash",
   shell: "bash",
   ts: "typescript",
+};
+
+// These styles intentionally live with the component. A published package cannot
+// assume that its consumer has Tailwind installed or that Tailwind scans
+// node_modules for utility classes.
+const styles: Record<string, CSSProperties> = {
+  container: {
+    overflow: "hidden",
+    border: "1px solid #334155",
+    borderRadius: "0.75rem",
+    background: "#020617",
+    boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+  },
+  header: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.75rem",
+    padding: "0.625rem 1rem",
+    borderBottom: "1px solid #334155",
+    background: "#0f172a",
+    color: "#f1f5f9",
+    fontSize: "0.875rem",
+  },
+  filename: { overflow: "hidden", color: "#f1f5f9", fontWeight: 500, textOverflow: "ellipsis", whiteSpace: "nowrap" },
+  language: {
+    padding: "0.125rem 0.5rem",
+    borderRadius: "0.25rem",
+    background: "#1e293b",
+    color: "#cbd5e1",
+    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    fontSize: "0.75rem",
+  },
+  button: {
+    marginLeft: "auto",
+    padding: "0.375rem 0.75rem",
+    border: "1px solid #475569",
+    borderRadius: "0.375rem",
+    background: "transparent",
+    color: "#f1f5f9",
+    cursor: "pointer",
+    font: "inherit",
+    fontWeight: 500,
+  },
+  codeContainer: { overflowX: "auto" },
 };
 
 function normalizeLanguage(language: string) {
@@ -62,29 +107,25 @@ export function CopyCodeBlock({
 
   return (
     <section
-      className={[
-        "overflow-hidden rounded-xl border border-slate-700 bg-slate-950 shadow-lg",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={className}
+      style={styles.container}
     >
-      <header className="flex items-center gap-3 border-b border-slate-700 bg-slate-900 px-4 py-2.5 text-sm">
-        {filename && <span className="truncate font-medium text-slate-100 gap-2">{filename}</span>}
-        <span className="rounded bg-slate-800 px-2 py-0.5 font-mono text-xs text-slate-300">
+      <header style={styles.header}>
+        {filename && <span style={styles.filename}>{filename}</span>}
+        <span style={styles.language}>
           {language}
         </span>
         <button
           type="button"
           onClick={handleCopy}
           aria-label={copyStatus === "idle" ? "Copy code to clipboard" : buttonText}
-          className="ml-auto rounded-md border border-slate-600 px-3 py-1.5 font-medium text-slate-100 transition hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:cursor-not-allowed"
+          style={styles.button}
         >
           {buttonText}
         </button>
       </header>
 
-      <div className="overflow-x-auto" aria-label={`${language} source code`}>
+      <div style={styles.codeContainer} aria-label={`${language} source code`}>
         <SyntaxHighlighter
           language={normalizedLanguage}
           style={oneDark}

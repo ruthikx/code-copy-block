@@ -39,7 +39,7 @@ console.log(greeting);`}
 
 ## Styling
 
-The component uses Tailwind CSS utility classes for its layout and header styles. Use it in an app with Tailwind configured, or provide equivalent CSS for the generated class names. Syntax highlighting is supplied by `react-syntax-highlighter`.
+The component includes its own default layout and controls, so no Tailwind CSS or stylesheet import is required. Syntax highlighting is supplied by `react-syntax-highlighter` using its built-in One Dark theme. Use `className` to add your own class to the outer container.
 
 ## Browser support
 
